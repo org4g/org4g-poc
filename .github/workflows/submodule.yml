@@ -25,6 +25,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      # IMPORTANT FOR config_changes to work
       with: 
         fetch-depth: 0
 
@@ -55,4 +56,4 @@ jobs:
       run: |
         chmod +x submodule.sh
         ./submodule.sh ${{ secrets.GITHUB_TOKEN }}
-      working-directory: ${{ github.workspace }}
+      working-directory: .
