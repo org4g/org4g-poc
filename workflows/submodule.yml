@@ -1,0 +1,39 @@
+name: Add Submodule and Request Access
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  add_submodule:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git Submodules
+      run: git submodule update --init
+
+  process_config:
+    needs: add_submodule
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Check for Changes in Config File
+      id: config_changes
+      run: |
+        CHANGES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "config.yml")
+        echo "::set-output name=config_changes::${CHANGES}"
+      working-directory: ${{ github.workspace }}
+
+    - name: Execute External Script
+      if: steps.config_changes.outputs.config_changes != ''
+      run: |
+        chmod +x process-config.sh
+        ./process-config.sh ${{ secrets.GITHUB_TOKEN }}
+      working-directory: ${{ github.workspace }}
