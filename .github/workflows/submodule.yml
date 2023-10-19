@@ -33,10 +33,21 @@ jobs:
 
     - name: Check for Changes in Config File
       id: config_changes
+
       run: |
-        CHANGES=$(git diff --name-only | grep "projects.list")
-        echo "::set-output name=config_changes::${CHANGES}"
-      working-directory: ${{ github.workspace }}
+        # Get the list of files changed in the current commit
+        CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+    
+        # Check if "projects.list" is in the list of changed files
+        if echo "$CHANGED_FILES" | grep -q "projects.list"; then
+          echo "projects.list has been changed."
+          echo "::set-output name=config_changes::true"
+        else
+          echo "projects.list has not been changed."
+          echo "::set-output name=config_changes::false"
+        fi
+      shell: bash
+
 
     - name: Execute External Script
       if: steps.config_changes.outputs.config_changes != ''
