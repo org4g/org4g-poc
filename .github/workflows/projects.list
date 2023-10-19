@@ -1,0 +1,5 @@
+submodules:
+# Seasons
+  - season: 0
+    url: https://github.com/gaudinnicolas32/d4g-season-project.git
+    branch: main
