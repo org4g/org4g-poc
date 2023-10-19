@@ -34,7 +34,7 @@ jobs:
     - name: Check for Changes in Config File
       id: config_changes
       run: |
-        CHANGES=$(git diff --name-only ${{ github.sha }} | grep "projects.list")
+        CHANGES=$(git diff --name-only | grep "projects.list")
         echo "::set-output name=config_changes::${CHANGES}"
       working-directory: ${{ github.workspace }}
 
