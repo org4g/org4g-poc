@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Git Submodules
       run: git submodule update --remote
@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check for Changes in Config File
       id: config_changes
@@ -35,5 +35,5 @@ jobs:
       if: steps.config_changes.outputs.config_changes != ''
       run: |
         chmod +x submodule.sh
-        ./process-config.sh ${{ secrets.GITHUB_TOKEN }}
+        ./submodule.sh ${{ secrets.GITHUB_TOKEN }}
       working-directory: ${{ github.workspace }}
