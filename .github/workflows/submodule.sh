@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 # Read the config file
-CONFIG_YAML=config.yml
+CONFIG_YAML=projects.list
 
 while IFS= read -r line; do
   season=$(echo $line | yq r - season)
