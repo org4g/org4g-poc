@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # Read the config file
 CONFIG_YAML=projects.list
