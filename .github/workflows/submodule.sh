@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/bash
 
 # Read the config file
 CONFIG_YAML=config.yml
