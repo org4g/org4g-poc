@@ -53,13 +53,14 @@ for block in "${blocks[@]}"; do
     repo_name=$(basename $url .git)
     # Format the season as a two-digit uppercase string (e.g., S01)
     season_name=$(printf "S%02d" $season)
-    # Build the submodule path
-    submodule_path="${org}-${season_name}-${repo_name}"
+    # Build the submodule name and path
+    submodule_name="${org}-${season_name}-${repo_name}"
+    submodule_path="/projects/${submodule_name}"
 
     # Check if the submodule exists; if not, add it
     if [ ! -d "$submodule_path" ]; then
       # Add the submodule with the specified branch
-      git submodule add --name $submodule_path --branch $branch $url /projects/"$submodule_path"
+      git submodule add --name $submodule_name --branch $branch $url "$submodule_path"
     fi
 
     # Request access to the repository
