@@ -55,7 +55,7 @@ for block in "${blocks[@]}"; do
     season_name=$(printf "S%02d" $season)
     # Build the submodule name and path
     submodule_name="${org}-${season_name}-${repo_name}"
-    submodule_path="/projects/${submodule_name}"
+    submodule_path="${submodule_name}"
 
     # Check if the submodule exists; if not, add it
     if [ ! -d "$submodule_path" ]; then
@@ -66,7 +66,7 @@ for block in "${blocks[@]}"; do
     # Request access to the repository
     REPO=$repo_name
     GITHUB_TOKEN=$1
-    RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "push"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
+    RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "triage"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
     echo $RESPONSE
 
 
