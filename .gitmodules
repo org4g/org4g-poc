@@ -1,7 +1,3 @@
-[submodule "org4g-S21-d4g-season-project"]
-	path = org4g-S21-d4g-season-project
-	url = https://github.com/gaudinnicolas32/d4g-season-project.git
-	branch = main
 [submodule "org4g-S00-d4g-season-project"]
 	path = org4g-S00-d4g-season-project
 	url = https://github.com/gaudinnicolas32/d4g-season-project.git

@@ -39,10 +39,10 @@ for block in "${blocks[@]}"; do
     
     # Extract the owner and determine if it's GitHub or GitLab
     if [[ $url == *github.com* ]]; then
-      owner=$(echo $url | sed 's/https:\/\/github.com\///;s/\/.*//')
+      repo_owner=$(echo $url | sed 's/https:\/\/github.com\///;s/\/.*//')
       api_base="https://api.github.com"
     elif [[ $url == *gitlab.com* ]]; then
-      owner=$(echo $url | sed 's/https:\/\/gitlab.com\///;s/\/.*//')
+      repo_owner=$(echo $url | sed 's/https:\/\/gitlab.com\///;s/\/.*//')
       api_base="https://gitlab.com/api/v4"
     else
       # Handle other repository hosting platforms here if needed
@@ -64,10 +64,21 @@ for block in "${blocks[@]}"; do
       git submodule add --name $submodule_name --branch $branch $url "$submodule_path"
     fi
 
+    
+
     # Request access to the repository
+    OWNER=$repo_owner
     REPO=$repo_name
     GITHUB_TOKEN=$1
-    RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "triage"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
+    #RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "triage"}' "$api_base/repos/$OWNER/$REPO/collaborators/$org")
+    
+    # Replace 'submodule_owner' and 'submodule_repo' with the owner and repository name of the submodule
+    # Replace 'submodule_branch' with the submodule branch you want to request access to
+    # Customize the issue title and body as needed
+    issue_title="Request Collaboration"
+    issue_body="Dear $OWNER,\n\n$org would like to request collaboration on the $REPO repository in the $branch branch. Please consider adding me as a collaborator."
+    
+    RESPONSE=$(curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "{\"title\":\"$issue_title\",\"body\":\"$issue_body\"}" "$api_base/repos/$OWNER/$REPO/issues")
     echo $RESPONSE
 
 
