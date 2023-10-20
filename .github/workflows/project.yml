@@ -46,7 +46,7 @@ jobs:
         fi
 
     - name: Add project submodule
-      #if: steps.ckeck_config.outputs.config_changes != ''
+      if: steps.ckeck_config.outputs.config_changes != ''
       run: |
         echo "projects.list has been changed."
         echo $SHELL
