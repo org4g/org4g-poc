@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      # IMPORTANT FOR check_config to work
+      # Limit: Important for next steps executions
       with: 
         fetch-depth: 0
 
@@ -46,12 +46,13 @@ jobs:
         fi
 
     - name: Execute External Script
-      # if: steps.config_changes.outputs.config_changes != ''
+      # if: steps.ckeck_config.outputs.config_changes != ''
       run: |
         echo "projects.list has been changed."
         echo $SHELL
         echo $(pwd)
         ls
         # chmod +x submodule.sh
-        # ./submodule.sh ${{ secrets.GITHUB_TOKEN }}
-      working-directory: .
+        git update-index --chmod=+x project.sh
+        # ./project.sh ${{ secrets.GITHUB_TOKEN }}
+      working-directory: ${{ github.workspace }}

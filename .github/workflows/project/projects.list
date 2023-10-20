@@ -1,0 +1,29 @@
+
+# Season projects
+
+# Minimal definition to create submodule:
+## int SEASON*
+## str URL*
+## str BRANCH 
+## IN THIS ORDER!!!
+## season, url are required, as they allow to derive the name and the path of the submodule, get the owner and the repo in GitHub Action
+## season int will be transformed in season_name "S01",...,"S99" :)
+## branch will default to 'main' if omitted
+
+## Submodule name and path are automatically determined and follow the following patterns:
+## submodule_name : parent_org-season_name-repo_name
+### parent_org=d4g, org4g, ... (this prefix helps in Vs Code to easier identify projetcs in Source Control)
+## submodule_path : /projects/season_name/submodule_name
+
+# Test season projects
+# gaudinnicolas32/d4g-season-project
+[test project ]
+  season: 0
+  url: https://github.com/gaudinnicolas32/d4g-season-project.git
+  branch: main
+
+[ other test project]
+  season: 21
+  url: https://github.com/gaudinnicolas32/d4g-season-project.git
+
+ 
