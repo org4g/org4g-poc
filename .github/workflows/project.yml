@@ -46,14 +46,14 @@ jobs:
         fi
 
     - name: Execute External Script
-      # if: steps.ckeck_config.outputs.config_changes != ''
+      #if: steps.ckeck_config.outputs.config_changes != ''
       run: |
         echo "projects.list has been changed."
         echo $SHELL
         echo $(pwd)
         ls
         # chmod +x submodule.sh
-        action_sh="${{ github.action_path }}/project/project.sh"
+        action_sh=".github/workflows/project/project.sh"
         git update-index --chmod=+x $action_sh
         # ./project.sh ${{ secrets.GITHUB_TOKEN }}
       working-directory: ${{ github.workspace }}
