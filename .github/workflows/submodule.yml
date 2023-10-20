@@ -44,11 +44,9 @@ jobs:
         if echo "$CHANGED_FILES" | grep -q "projects.list"; then
           echo "::set-output name=config_changes::true"
         fi
-      shell: bash
-
 
     - name: Execute External Script
-      if: steps.config_changes.outputs.config_changes != ''
+      # if: steps.config_changes.outputs.config_changes != ''
       run: |
         echo "projects.list has been changed."
         echo $SHELL
