@@ -59,14 +59,12 @@ for block in "${blocks[@]}"; do
     # Check if the submodule exists; if not, add it
     if [ ! -d "$submodule_path" ]; then
       # Add the submodule with the specified branch
-      echo "git submodule add --name $submodule_path --branch $branch $url "$submodule_path""
+      git submodule add --name $submodule_path --branch $branch $url /projects/"$submodule_path"
     fi
 
     # Request access to the repository
     REPO=$repo_name
     GITHUB_TOKEN=$1
-    echo "$GITHUB_TOKEN"
-    echo "$GITHUB_TOKEN"
     RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "push"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
     echo $RESPONSE
 
