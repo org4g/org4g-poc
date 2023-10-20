@@ -56,7 +56,7 @@ jobs:
         #action_sh="project.sh"
         #git update-index --chmod=+x project.sh
         chmod +x .github/workflows/project/project.sh
-        .github/workflows/project/project.sh ${{ secrets.GITHUB_TOKEN }}
+        .github/workflows/project/project.sh ${{ secrets.ORG4G_SECRET }}
       working-directory: ${{ github.workspace }}
 
     - name: Commit Changes
@@ -69,4 +69,4 @@ jobs:
     - name: Push Changes
       uses: ad-m/github-push-action@master
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.ORG4G_SECRET }}
