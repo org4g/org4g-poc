@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      # IMPORTANT FOR config_changes to work
+      # IMPORTANT FOR check_config to work
       with: 
         fetch-depth: 0
 
@@ -35,18 +35,14 @@ jobs:
       run: echo "$GITHUB_CONTEXT"      
 
     - name: Check for Changes in Config File
-      id: config_changes
+      id: ckeck_config
       run: |
         # Get the list of files changed in the current commit
         CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
     
         # Check if "projects.list" is in the list of changed files
         if echo "$CHANGED_FILES" | grep -q "projects.list"; then
-          echo "projects.list has been changed."
           echo "::set-output name=config_changes::true"
-        else
-          echo "projects.list has not been changed."
-          echo "::set-output name=config_changes::false"
         fi
       shell: bash
 
@@ -54,6 +50,10 @@ jobs:
     - name: Execute External Script
       if: steps.config_changes.outputs.config_changes != ''
       run: |
-        chmod +x submodule.sh
-        ./submodule.sh ${{ secrets.GITHUB_TOKEN }}
+        echo "projects.list has been changed."
+        echo $SHELL
+        echo $(pwd)
+        ls
+        # chmod +x submodule.sh
+        # ./submodule.sh ${{ secrets.GITHUB_TOKEN }}
       working-directory: .
