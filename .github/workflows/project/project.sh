@@ -2,6 +2,7 @@
 
 # Define the path to the external YAML file
 project_list="projects.list"
+org=org4g
 
 # Check if the YAML file exists
 if [ ! -f "$project_list" ]; then
@@ -65,8 +66,9 @@ for block in "${blocks[@]}"; do
     REPO=$repo_name
     GITHUB_TOKEN=$1
     echo "$GITHUB_TOKEN"
-    # RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "push"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
-    # echo $RESPONSE
+    echo "$GITHUB_TOKEN"
+    RESPONSE=$(curl -X PUT -H "Authorization: token $GITHUB_TOKEN" -d '{"permission": "push"}' "$api_base/repos/$owner/$REPO/collaborators/$org")
+    echo $RESPONSE
 
 
   fi
