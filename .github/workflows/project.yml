@@ -53,6 +53,7 @@ jobs:
         echo $(pwd)
         ls
         # chmod +x submodule.sh
-        git update-index --chmod=+x project.sh
+        action_sh="${{ github.action_path }}/project/project.sh"
+        git update-index --chmod=+x $action_sh
         # ./project.sh ${{ secrets.GITHUB_TOKEN }}
       working-directory: ${{ github.workspace }}
