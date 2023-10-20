@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Define the path to the external YAML file
-project_list="projects.list"
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+project_list="$SCRIPT_DIR/projects.list"
 org=org4g
 
 # Check if the YAML file exists
