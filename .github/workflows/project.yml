@@ -3,7 +3,7 @@ name: Add Submodule and Request Access
 on:
   push:
     paths: 
-      - projects.list
+      - '**/projects.list'
 
 jobs:
   update_submodules:
