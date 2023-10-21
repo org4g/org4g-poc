@@ -17,7 +17,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ORG_TOKEN: ${{ secrets.ORG4G_SECRET }}
-        WORKFLOWS: ${{ vars.WORKFLOWS }}
+        WORKFLOWS_DIR: ${{ vars.WORKFLOWS_DIR }}
       run: |
-        chmod +x $WORKFLOWS/volunteer/add_volunteer.sh
-        $WORKFLOWS/volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
+        chmod +x $WORKFLOWS_DIR/volunteer/add_volunteer.sh
+        $WORKFLOWS_DIR/volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
