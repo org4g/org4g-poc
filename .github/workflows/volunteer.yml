@@ -1,0 +1,22 @@
+name: Add Volunteer to Volunteers Team
+
+on:
+  watch:
+    types:
+      - started
+
+jobs:
+  add_volunteer_to_team:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Run Bash Script
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ORG_TOKEN: ${{ secrets.ORG4G_SECRET }}
+      run: |
+        chmod +x ./volunteer/add_volunteer.sh
+        ./volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
