@@ -18,5 +18,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ORG_TOKEN: ${{ secrets.ORG4G_SECRET }}
       run: |
-        chmod +x ${{ vars.WORKFLOWS }}/volunteer/add_volunteer.sh
-        ${{ vars.WORKFLOWS }}/volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
+        chmod +x ${{ env.vars.WORKFLOWS }}/volunteer/add_volunteer.sh
+        ${{ env.vars.WORKFLOWS }}/volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
