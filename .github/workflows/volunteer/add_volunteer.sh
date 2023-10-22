@@ -24,15 +24,15 @@ echo $USER_ID
 # GraphQL Query to Get Team ID
 QUERY_GET_TEAM_ID=$(cat <<EOF
 { \
-  organization(login: \"$ORG_NAME\") { \
-    team(slug: \"$TEAM_NAME\") { id } \
-  } \
+ organization(login: \"$ORG_NAME\") { \
+  team(slug: \"$TEAM_NAME\") { id } \
+ } \
 }
 EOF
 )
 echo $QUERY_GET_TEAM_ID
 # Get the team ID
-TEAM_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\":\"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql | jq -r .data.organization.team.id)
+TEAM_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql | jq -r .data.organization.team.id)
 echo $TEAM_ID
 
 # GraphQL Query to Add Member to Team
