@@ -49,10 +49,10 @@ TEAM_ID=$(curl -s -H "Authorization: Bearer $ORG_TOKEN" -X POST -d "{\"query\": 
 # echo $RESPONSE
 
 # Define the role (member or maintainer)
-ROLE="member"
+ROLE="maintainer"
 
 # Make the REST API request
-RESPONSE=$(curl -X PUT -H "Authorization: bearer $ORG_TOKEN" -d "{\"role\":\"$ROLE\"}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_ID/memberships/$VOLUNTEER_USERNAME")
+RESPONSE=$(curl -X PUT -H "Authorization: bearer $ORG_TOKEN" -d "{\"role\":\"$ROLE\"}" "https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_NAME/memberships/$VOLUNTEER_USERNAME")
 echo $RESPONSE
 
 if [[ "$RESPONSE" =~ "Access not granted" ]]; then
