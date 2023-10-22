@@ -9,11 +9,9 @@ VOLUNTEER_USERNAME=$3
  
 # GraphQL Query to Get User ID
 QUERY_GET_USER_ID=$(cat <<EOF
-query {
   user(login: \"$VOLUNTEER_USERNAME\") {
     id
   }
-}
 EOF
 )
 echo $QUERY_GET_USER_ID
