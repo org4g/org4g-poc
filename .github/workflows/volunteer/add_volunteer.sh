@@ -8,10 +8,10 @@ TEAM_NAME=Volunteers
 VOLUNTEER_USERNAME=$3
  
 # GraphQL Query to Get User ID
-QUERY_GET_USER_ID=$(cat <<EOF
-user(login: \"$VOLUNTEER_USERNAME\") {  id }
-EOF
-)
+QUERY_GET_USER_ID="
+ user(login: \"$VOLUNTEER_USERNAME\") { id }
+"
+
 echo $QUERY_GET_USER_ID
 # Get the user ID
 USER_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql)
