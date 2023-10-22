@@ -20,4 +20,4 @@ jobs:
         WORKFLOWS_DIR: ${{ vars.WORKFLOWS_DIR }}
       run: |
         chmod +x $WORKFLOWS_DIR/volunteer/add_volunteer.sh
-        $WORKFLOWS_DIR/volunteer/add_volunteer.sh $GITHUB_TOKEN ${{ github.actor }}
+        $WORKFLOWS_DIR/volunteer/add_volunteer.sh $ORG_TOKEN ${{ github.actor }}
