@@ -31,7 +31,7 @@ EOF
 # GraphQL Query to Add Member to Team
 QUERY_ADD_MEMBER_TO_TEAM=$(cat <<EOF
 mutation {
-  addTeamMember(input: { teamId: "TEAM_ID", username: "VOLUNTEER_USERNAME" }) {
+  addTeamMember(input: { teamId: "$TEAM_ID", username: "$VOLUNTEER_USERNAME" }) {
     clientMutationId
   }
 }
