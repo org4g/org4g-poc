@@ -5,7 +5,7 @@ GITHUB_TOKEN=$1
 ORG_NAME=ORG4G
 TEAM_NAME=Volunteers
 VOLUNTEER_USERNAME=$2
-
+ 
 # GraphQL Query to Get User ID
 QUERY_GET_USER_ID=$(cat <<EOF
 {
