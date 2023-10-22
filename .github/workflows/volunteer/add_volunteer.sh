@@ -14,7 +14,6 @@ QUERY_GET_USER_ID=$(cat <<EOF
 }
 EOF
 )
-
 echo $QUERY_GET_USER_ID
 # Get the user ID
 USER_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql | jq -r .data.user.id)
@@ -30,10 +29,9 @@ QUERY_GET_TEAM_ID=$(cat <<EOF
 }
 EOF
 )
-
 echo $QUERY_GET_TEAM_ID
 # Get the team ID
-TEAM_ID=$(curl -s -H "Authorization: Bearer $ORG_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql)
+TEAM_ID=$(curl -s -H "Authorization: Bearer $ORG_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql | jq -r .data.organization.team.id)
 echo $TEAM_ID
 
 # GraphQL Query to Add Member to Team
@@ -47,7 +45,7 @@ EOF
 )
 echo $QUERY_ADD_MEMBER_TO_TEAM
 # Add the user to the team
-RESPONSE=$(curl -s -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "{\"query\":\"$QUERY_ADD_MEMBER_TO_TEAM\"}" https://api.github.com/graphql)
+RESPONSE=$(curl -s -H "Authorization: bearer $ORG_TOKEN" -X POST -d "{\"query\": \"$QUERY_ADD_MEMBER_TO_TEAM\"}" https://api.github.com/graphql)
 echo $RESPONSE
 
 if [[ "$RESPONSE" =~ "Access not granted" ]]; then
