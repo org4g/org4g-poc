@@ -10,9 +10,7 @@ VOLUNTEER_USERNAME=$3
 # GraphQL Query to Get User ID
 QUERY_GET_USER_ID=$(cat <<EOF
 { \
- user(login: \"$VOLUNTEER_USERNAME\") { \
-  id \
- } \
+ user(login: \"$VOLUNTEER_USERNAME\") { id } \
 } 
 EOF
 )
@@ -25,11 +23,11 @@ echo $USER_ID
 
 # GraphQL Query to Get Team ID
 QUERY_GET_TEAM_ID=$(cat <<EOF
+{ \
   organization(login: "$ORG_NAME") {
-    team(slug: "$TEAM_NAME") {
-      id
-    }
-  }
+    team(slug: "$TEAM_NAME") { id } \
+  } \
+}
 EOF
 )
 echo $QUERY_GET_TEAM_ID
@@ -39,10 +37,10 @@ echo $TEAM_ID
 
 # GraphQL Query to Add Member to Team
 QUERY_ADD_MEMBER_TO_TEAM=$(cat <<EOF
-mutation {
-  addTeamMember(input: { teamId: "$TEAM_ID", username: "$VOLUNTEER_USERNAME" }) {
-    clientMutationId
-  }
+mutation { \
+  addTeamMember(input: { teamId: "$TEAM_ID", username: "$VOLUNTEER_USERNAME" }) { \
+    clientMutationId \
+  } \
 }
 EOF
 )
