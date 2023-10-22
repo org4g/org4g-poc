@@ -13,7 +13,7 @@ QUERY_GET_USER_ID=$(cat <<EOF
  user(login: \"$VOLUNTEER_USERNAME\") { \
   id \
  } \
-} \
+} 
 EOF
 )
 
