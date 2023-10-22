@@ -11,8 +11,7 @@ VOLUNTEER_USERNAME=$3
 QUERY_GET_USER_ID=$(cat <<EOF
 { \
  user(login: \"$VOLUNTEER_USERNAME\") { id } \
-} 
-EOF
+} EOF
 )
 
 echo $QUERY_GET_USER_ID
@@ -24,11 +23,10 @@ echo $USER_ID
 # GraphQL Query to Get Team ID
 QUERY_GET_TEAM_ID=$(cat <<EOF
 { \
-  organization(login: "$ORG_NAME") {
+  organization(login: "$ORG_NAME") { \
     team(slug: "$TEAM_NAME") { id } \
   } \
-}
-EOF
+} EOF
 )
 echo $QUERY_GET_TEAM_ID
 # Get the team ID
