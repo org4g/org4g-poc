@@ -9,18 +9,16 @@ VOLUNTEER_USERNAME=$3
  
 # GraphQL Query to Get User ID
 QUERY_GET_USER_ID=$(cat <<EOF
+{
  user(login: \"$VOLUNTEER_USERNAME\") {
   id
  }
+}
 EOF
 )
 echo $QUERY_GET_USER_ID
 # Get the user ID
-USER_ID=$(curl -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d " \
-{ \
- \"query\": \"query { $QUERY_GET_USER_ID }\" \
-} \
-" https://api.github.com/graphql)
+USER_ID=$(curl -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql)
 echo $USER_ID
 
 
