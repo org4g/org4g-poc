@@ -27,7 +27,7 @@ QUERY_GET_TEAM_ID=$(cat <<EOF
 }
 EOF
 )
-
+echo $QUERY_ADD_MEMBER_TO_TEAM
 # GraphQL Query to Add Member to Team
 QUERY_ADD_MEMBER_TO_TEAM=$(cat <<EOF
 mutation {
@@ -37,6 +37,7 @@ mutation {
 }
 EOF
 )
+echo $QUERY_ADD_MEMBER_TO_TEAM
 
 # Get the user ID
 USER_ID=$(curl -s -H "Authorization: bearer $GITHUB_TOKEN" -X POST -d "{\"query\":\"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql | jq -r .data.user.id)
