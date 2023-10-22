@@ -19,7 +19,7 @@ EOF
 
 echo $QUERY_GET_USER_ID
 # Get the user ID
-USER_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql)
+USER_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_USER_ID\"}" https://api.github.com/graphql | jq -r .data.user.id)
 echo $USER_ID
 
 
