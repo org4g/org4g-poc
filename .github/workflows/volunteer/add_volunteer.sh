@@ -33,7 +33,7 @@ EOF
 
 echo $QUERY_GET_TEAM_ID
 # Get the team ID
-TEAM_ID=$(curl -s -H "Authorization: Bearer $GITHUB_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql)
+TEAM_ID=$(curl -s -H "Authorization: Bearer $ORG_TOKEN" -X POST -d "{\"query\": \"$QUERY_GET_TEAM_ID\"}" https://api.github.com/graphql)
 echo $TEAM_ID
 
 # GraphQL Query to Add Member to Team
