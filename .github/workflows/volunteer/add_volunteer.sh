@@ -24,7 +24,7 @@ echo $USER_ID
 # GraphQL Query to Get Team ID
 QUERY_GET_TEAM_ID=$(cat <<EOF
 { \
-  organization(login: "$ORG_NAME") { \
+  organization(login: \"$ORG_NAME\") { \
     team(slug: \"$TEAM_NAME\") { id } \
   } \
 }
