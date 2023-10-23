@@ -12,7 +12,7 @@ jobs:
     steps:      
     - name: Checkout repository
       uses: actions/checkout@v4
-      
+
     - name: Set up Git Submodules
       run: git submodule update --remote --init
 
@@ -46,19 +46,19 @@ jobs:
     - name: Add project submodule
       if: steps.ckeck_config.outputs.config_changes != ''
       env:
+        WORKFLOWS_DIR: ${{ vars.WORKFLOWS_DIR }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         ORG_TOKEN: ${{ secrets.ORG4G_SECRET }}
       run: |
         echo "projects.list has been changed."
         # git update-index --chmod=+x ./project/project.sh
-        chmod +x ./project/project.sh
-        ./project/project.sh $ORG_TOKEN
+        chmod +x $WORKFLOWS_DIR//project/project.sh
+        $WORKFLOWS_DIR//project/project.sh $ORG_TOKEN
 
-    - name: Commit Changes
-      if: steps.ckeck_config.outputs.config_changes != ''
-      run: |
+        # Commit changes
         git config user.name "${{ github.repository_owner }}"       
         git add .
-        git commit -m "Action: Submodules management"
+        git commit -m "Action: Added Submodule"
       working-directory: ${{ github.workspace }}
 
     - name: Push Changes

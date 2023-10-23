@@ -76,7 +76,7 @@ for block in "${blocks[@]}"; do
       echo $RESPONSE
 
       # ISSUE
-      issue_title="Request Collaboration"
+      issue_title="@$org Request Collaboration"
       issue_body="Dear $OWNER,\n\nThe @$org would like to request collaboration on the $REPO repository in the $branch branch.\nPlease consider adding us as a collaborator."
       
       RESPONSE=$(curl -X POST -H "Authorization: Bearer $ORG_TOKEN" -d "{\"title\":\"$issue_title\",\"body\":\"$issue_body\"}" "$api_base/repos/$OWNER/$REPO/issues")
