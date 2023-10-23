@@ -4,7 +4,7 @@
 ## int SEASON*
 ## str URL*
 ## str BRANCH 
-## IN THIS ORDER!!!
+
 ## season, url are required, as they allow to derive the name and the path of the submodule, get the owner and the repo in GitHub Action
 ## season int will be transformed in season_name "S01",...,"S99" :)
 ## branch will default to 'main' if omitted
