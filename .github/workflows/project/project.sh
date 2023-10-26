@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# Define the path to the external YAML file
+
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 project_list="$SCRIPT_DIR/projects.list"
 org=org4g
 
-# Check if the YAML file exists
 if [ ! -f "$project_list" ]; then
   echo "Error: projects file not found: $project_list"
   exit 1
@@ -61,30 +60,26 @@ for block in "${blocks[@]}"; do
     # Check if the submodule exists; if not, add it
     if [ ! -d "$submodule_path" ]; then
 
-      # Add the submodule with the specified branch
-      git submodule add --name $submodule_name --branch $branch $url "$submodule_path"   
-
-
       # Request access to the repository
       OWNER=$repo_owner
       REPO=$repo_name
       # TOKEN created at organisation level secret by $org 
       ORG_TOKEN=$1
 
-      #ACCESS REQUEST
+      # ACCESS REQUEST
       RESPONSE=$(curl -X PUT -H "Authorization: Bearer $ORG_TOKEN" "$api_base/repos/$OWNER/$REPO/collaborators/$org")
       echo $RESPONSE
 
       # ISSUE
       issue_title="@$org COLLABORATION REQUEST "
-      issue_body="Dear $OWNER,\n\nThe @$org would like to request collaboration on the $REPO repository in the $branch branch.\nPlease consider adding us as a collaborator."
+      issue_body="Dear $OWNER,\n\nThe @$org organization would like to request collaboration on the $REPO repository in the $branch branch.\nPlease consider adding us as a collaborator."
       
       RESPONSE=$(curl -X POST -H "Authorization: Bearer $ORG_TOKEN" -d "{\"title\":\"$issue_title\",\"body\":\"$issue_body\"}" "$api_base/repos/$OWNER/$REPO/issues")
       echo $RESPONSE
 
+ 
+
     fi
-
-
 
   fi
 done
