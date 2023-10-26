@@ -43,7 +43,7 @@ jobs:
           echo "::set-output name=config_changes::true"
         fi
 
-    - name: Add project submodule
+    - name: Project Access Request
       if: steps.ckeck_config.outputs.config_changes != ''
       env:
         WORKFLOWS_DIR: ${{ vars.WORKFLOWS_DIR }}
@@ -55,14 +55,4 @@ jobs:
         chmod +x $WORKFLOWS_DIR//project/project.sh
         $WORKFLOWS_DIR//project/project.sh $ORG_TOKEN
 
-        # Commit changes
-        git config user.name "${{ github.repository_owner }}"       
-        git add .
-        git commit -m "Action: Added Submodule"
       working-directory: ${{ github.workspace }}
-
-    - name: Push Changes
-      if: steps.ckeck_config.outputs.config_changes != ''  
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.ORG4G_SECRET }}
